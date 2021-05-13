@@ -1,6 +1,27 @@
 name: CI
 on: [push]
 jobs:
+  publish:
+    - uses: actions/checkout@v2
+    # Publish to a branch in current repo using GITHUB_TOKEN and other default settings.
+    - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+      with:
+        token: '${{ secrets.GITHUB_TOKEN }}'
+    - run: |
+        yarn run build
+        yarn run deploy
+    # Publish to a branch in a different repo
+    # using a PAT generated on that other repo.
+    # Option `global` is set to true as the deployment script may create 
+    # a temporary local repo for a build and we want it to reuse git user settings.
+    # Option `actor` is assigned as per that different repo cloud user.
+    - uses: oleksiyrudenko/gha-git-credentials@v2.1
+      with:
+        global: true
+        email: 'aldhanekaai@gmail.com'
+        actor: 'mts-technonatura'
+        token: '${{ secrets.GL_PAT_WEB_CENTRAL }}'
+
   build:
     name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
 
@@ -28,6 +49,11 @@ jobs:
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
 
+      - name: Git Config Email
+        run: |
+          git config --global user.email "aldhanekaai@gmail.com"
+          git config --global user.name "mts-technonatura"
+          
       - name: Build
         run: yarn build-storybook
 
