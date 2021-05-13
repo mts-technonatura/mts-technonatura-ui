@@ -44,7 +44,12 @@ jobs:
           git config --global user.name "MTs Technonatura"    
           git config --global user.username "mts-technonatura"    
           
-      - run: yarn build-storybook  
+      - run: yarn build-storybook 
+      
+      - uses: actions/labeler@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        
       - run: yarn deploy-storybook
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
