@@ -39,6 +39,7 @@ jobs:
       - run: | 
           git config --global user.email "aldhanekaai@gmail.com"
           git config --global user.name "MTs Technonatura"    
+          git config --global user.username "mts-technonatura"    
           
       - run: yarn build-storybook  
       - run: yarn deploy-storybook
