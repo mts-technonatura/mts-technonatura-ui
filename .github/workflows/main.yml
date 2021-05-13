@@ -15,6 +15,7 @@ jobs:
       - uses: actions/labeler@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -37,6 +38,7 @@ jobs:
         run: |
           git config --global user.email "aldhanekaai@gmail.com"
           git config --global user.name "mts-technonatura"
+          Omit --global
           
       - name: Build
         run: yarn build-storybook
