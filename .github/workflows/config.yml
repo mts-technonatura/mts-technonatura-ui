@@ -1,0 +1,4 @@
+deploy:
+  type: git
+  repo: git@github.com:mts-technonatura/mts-technonatura.github.io.git
+  branch: master
