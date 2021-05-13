@@ -12,6 +12,10 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+      - uses: actions/labeler@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Checkout repo
         uses: actions/checkout@v2
 
@@ -28,11 +32,6 @@ jobs:
 
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
-
-      - name: Git Config Email
-        run: |
-          git config --global user.email "aldhanekaai@gmail.com"
-          git config --global user.name "mts-technonatura"
 
       - name: Build
         run: yarn build-storybook
