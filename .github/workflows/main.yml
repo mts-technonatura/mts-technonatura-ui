@@ -1,13 +1,6 @@
 name: Deployment
 on: [push]
 jobs:
-  triage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/labeler@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          
   build:
     name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
 
@@ -39,22 +32,5 @@ jobs:
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
           
-      - run: | 
-          git config --global user.email "aldhanekaai@gmail.com"
-          git config --global user.name "MTs Technonatura"    
-          git config --global user.username "mts-technonatura"    
-          
-      - run: yarn build-storybook 
-      
-      - uses: actions/labeler@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-        
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
-          
-
-
+      - name: Build
+        run: yarn prepare
