@@ -36,6 +36,10 @@ jobs:
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
           
+      - run: | 
+          git config --global user.email "aldhanekaai@gmail.com"
+          git config --global user.name "MTs Technonatura"    
+          
       - run: yarn build-storybook  
       - run: yarn deploy-storybook
       - name: Deploy
