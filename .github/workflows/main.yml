@@ -28,9 +28,11 @@ jobs:
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
 
-      - name: Git Config
-        run: git config --global user.email "aldhanekadev@gmail.com" &&
-            git config --global user.name "aldhanekaa"
+      - name: Git Config Email
+        run: git config --global user.email "aldhanekadev@gmail.com"
+
+      - name: Git Config Username
+        run: git config --global user.name "Aldhanekaa"
 
       - name: Build
         run: yarn build-storybook
