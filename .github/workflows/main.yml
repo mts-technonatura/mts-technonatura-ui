@@ -12,11 +12,7 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/labeler@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          
+    
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v1
@@ -42,11 +38,6 @@ jobs:
           
       - name: Build
         run: yarn build-storybook
-
-      - name: Git Config
-        run: |
-          git config --global user.email "aldhanekaai@gmail.com"
-          git config --global user.name "mts-technonatura"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
